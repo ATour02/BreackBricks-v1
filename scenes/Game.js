@@ -14,10 +14,12 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    // Background
+    this.cameras.main.setBackgroundColor("#FFF8DC")
      //Pala
-     this.rectangle = this.add.rectangle(400, 500, 140, 30, 0xffffff);
+     this.rectangle = this.add.rectangle(400, 500, 140, 30, 0x0000FF);
      //Pelota
-     this.ball = this.add.circle(300,400,20,0xffffff);
+     this.ball = this.add.circle(350,50,20,0x00FF00);
     //Fisicas pala
      this.physics.add.existing(this.rectangle);
      this.rectangle.body.setImmovable(true);
@@ -26,12 +28,16 @@ export default class Game extends Phaser.Scene {
      this.physics.add.existing(this.ball);
      this.ball.body.setCollideWorldBounds(true);
      this.ball.body.setBounce(1);
-     this.ball.body.setVelocity(450, 300);
+     this.ball.body.setVelocity(350, 300);
      // Obstaculo
-     this.obstacle = this.add.rectangle(300,200,140,100,0xffffff),
+     this.obstacle = this.add.rectangle(300,200,140,100,0x00FFFF),
      this.physics.add.existing(this.obstacle);
      this.obstacle.body.setImmovable(true);
      this.obstacle.body.setBounce(1);
+     //Perder
+     this.final = this.add.rectangle(400,600, 800, 15, 0xFF0000)
+     this.physics.add.existing(this.final);
+     this.final.body.setCollideWorldBounds(true);
      //Creacion de teclas de movimiento
      this.cursor = this.input.keyboard.createCursorKeys();
     //Colliders 
@@ -52,6 +58,16 @@ export default class Game extends Phaser.Scene {
     null,
     this
    )
+   this.physics.add.collider(
+    this.ball,
+    this.final,
+    this.resLevel = (ball, final) => {
+      console.log("Perdiste");
+      this.scene.restart();
+    },
+    null,
+    this
+   );
   
   }
 
