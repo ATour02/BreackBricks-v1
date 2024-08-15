@@ -68,7 +68,11 @@ export default class Game extends Phaser.Scene {
     null,
     this
    );
-  
+   //Texto de Seguimiento
+    this.add.text(50, 50, "Nivel Inicial", {
+      font: '16px Arial',
+      fill: '#000000' // Color del texto en blanco
+  });
   }
 
   update() {
